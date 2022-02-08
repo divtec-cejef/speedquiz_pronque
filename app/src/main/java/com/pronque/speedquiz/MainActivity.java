@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button BT_add_player;
@@ -30,16 +29,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar main_toolbar = findViewById(R.id.main_toolbar);
+        Toolbar main_toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(main_toolbar);
 
         BT_add_player = findViewById(R.id.bt_add_player);
         BT_start_new_game = findViewById(R.id.bt_start_new_game);
-        LL_player = findViewById(R.id.layout_player);
-        FL_settings = findViewById(R.id.layout_settings);
-        FL_questions = findViewById(R.id.layout_questions);
-        ET_name_player1 = findViewById(R.id.name_player1_editext);
-        ET_name_player2 = findViewById(R.id.name_player2_editext);
+        LL_player = findViewById(R.id.linearlayout_player);
+        FL_settings = findViewById(R.id.framelayout_settings);
+        FL_questions = findViewById(R.id.framelayout_questions);
+        ET_name_player1 = findViewById(R.id.editext_name_player1);
+        ET_name_player2 = findViewById(R.id.editext_name_player2);
     }
 
     @Override

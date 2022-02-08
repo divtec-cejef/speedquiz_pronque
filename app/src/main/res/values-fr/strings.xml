@@ -11,4 +11,7 @@
     <string name="question_player2">Question joueur 2</string>
     <string name="menu">Menu</string>
     <string name="replay">Recommencer</string>
+    <string name="questions_length">Durée des questions (s)</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="add_question">Ajouter question</string>
 </resources>

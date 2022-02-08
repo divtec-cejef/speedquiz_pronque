@@ -11,4 +11,7 @@
     <string name="question_player2">Question player 2</string>
     <string name="menu">Menu</string>
     <string name="replay">Replay</string>
+    <string name="questions_length">Questions length (s)</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="add_question">Add question</string>
 </resources>

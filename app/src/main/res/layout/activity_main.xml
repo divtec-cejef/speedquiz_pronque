@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_add_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:text="@string/new_player" />
+
+    <LinearLayout
+        android:id="@+id/layout_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_start_new_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="120dp"
+            android:text="@string/start_new_game" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.speedQuiz.TextInputLayer.Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_player1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_player1_editext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.speedQuiz.TextInputLayer.Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_player2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_player2_editext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Durée des questions (s)"
+            android:textSize="20dp" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_length_questions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:value="10.0"
+            android:valueFrom="1.0"
+            android:stepSize="1.0"
+            android:valueTo="20.0" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="80dp"
+            android:textSize="20dp"
+            android:text="Mode sombre"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Ajouter une question"
+            android:textSize="20dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.speedQuiz.TextInputLayer.Question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Question">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editext_new_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </FrameLayout>
+</LinearLayout>

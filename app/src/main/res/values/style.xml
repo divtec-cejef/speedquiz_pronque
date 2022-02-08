@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Style général de l'application -->
+    <style name="Theme.speedQuiz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customisation du thème -->
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/teal_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- <item name="colorSecondary"></item>
+        <item name="colorSecondaryVariant"></item> -->
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <!-- Style pour les input text name -->
+    <style name="Widget.speedQuiz.TextInputLayer.Name" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/teal_700</item>
+        <item name="hintTextColor">@color/teal_200</item>
+        <item name="hintTextAppearance">@style/TextAppearance.speedQuiz.TextInputLayout.HintText
+        </item>
+        <item name="suffixText">Nom</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- Style pour les input text question -->
+    <style name="Widget.speedQuiz.TextInputLayer.Question" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/teal_700</item>
+        <item name="strokeColor">@color/teal_700</item>
+        <item name="hintTextColor">@color/teal_200</item>
+        <item name="hintTextAppearance">@style/TextAppearance.speedQuiz.TextInputLayout.HintText
+        </item>
+        <item name="suffixText">Question</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- Style pour les input text -->
+    <style name="TextAppearance.speedQuiz.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

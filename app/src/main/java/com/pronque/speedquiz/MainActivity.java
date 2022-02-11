@@ -19,6 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.slider.Slider;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText ET_name_player1;
     private EditText ET_name_player2;
     private EditText ET_add_question;
+    private Slider SL_length_questions;
 
     private ArrayList<String> listeQuestions = new ArrayList<>();
 
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         ET_name_player1 = findViewById(R.id.editext_name_player1);
         ET_name_player2 = findViewById(R.id.editext_name_player2);
         ET_add_question = findViewById(R.id.editext_new_question);
+        SL_length_questions = findViewById(R.id.slider_length_questions);
     }
 
     @Override
@@ -119,19 +123,6 @@ public class MainActivity extends AppCompatActivity {
             LL_player.setVisibility(View.VISIBLE);
         });
 
-        BT_start_new_game.setOnClickListener(v -> {
-            // Récupère le nom des joueurs
-            String namePlayer1 = ET_name_player1.getText().toString();
-            String namePlayer2 = ET_name_player2.getText().toString();
-
-            // Permet d'appeller une activité
-            Intent i = new Intent(getApplicationContext(), GameActivity.class);
-            i.putExtra("listQuestions", listeQuestions);
-            i.putExtra("namePlayer1", namePlayer1);
-            i.putExtra("namePlayer2", namePlayer2);
-            startActivity(i);
-        });
-
         BT_settings_cancel.setOnClickListener(v -> {
             LL_player.setVisibility(View.GONE);
             FL_settings.setVisibility(View.GONE);
@@ -162,6 +153,21 @@ public class MainActivity extends AppCompatActivity {
             LL_player.setVisibility(View.GONE);
             FL_settings.setVisibility(View.GONE);
             FL_questions.setVisibility(View.GONE);
+        });
+
+        BT_start_new_game.setOnClickListener(v -> {
+            // Récupère le nom des joueurs
+            String namePlayer1 = ET_name_player1.getText().toString();
+            String namePlayer2 = ET_name_player2.getText().toString();
+            float lengthQuestions = SL_length_questions.getValue();
+
+            // Permet d'appeller une activité
+            Intent i = new Intent(getApplicationContext(), GameActivity.class);
+            i.putExtra("listQuestions", listeQuestions);
+            i.putExtra("namePlayer1", namePlayer1);
+            i.putExtra("namePlayer2", namePlayer2);
+            i.putExtra("lengthQuestions", lengthQuestions);
+            startActivity(i);
         });
     }
 

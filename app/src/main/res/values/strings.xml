@@ -9,9 +9,11 @@
     <string name="name_player2">Name player 2</string>
     <string name="question_player1">Question player 1</string>
     <string name="question_player2">Question player 2</string>
-    <string name="menu">Menu</string>
-    <string name="replay">Replay</string>
+    <string name="game_menu">Menu</string>
+    <string name="game_replay">Replay</string>
     <string name="questions_length">Questions length (s)</string>
     <string name="dark_mode">Dark mode</string>
     <string name="add_question">Add question</string>
+    <string name="bt_settings_apply">Apply</string>
+    <string name="bt_settings_cancel">Cancel</string>
 </resources>

@@ -17,9 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.pronque.speedquiz.Models.Question;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Button BT_settings_cancel;
     private Button BT_questions_apply;
     private Button BT_questions_cancel;
-    // private  SWITCH_night_mode;
+    private SwitchMaterial SW_night_mode;
     private LinearLayout LL_player;
     private FrameLayout FL_settings;
     private FrameLayout FL_questions;
@@ -38,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText ET_name_player2;
     private EditText ET_add_question;
     private Slider SL_length_questions;
+    private SwitchMaterial SW_answer_question;
 
-    private ArrayList<String> listeQuestions = new ArrayList<>();
+    private ArrayList<Question> questionsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         BT_settings_cancel = findViewById(R.id.bt_settings_cancel);
         BT_questions_apply = findViewById(R.id.bt_questions_apply);
         BT_questions_cancel = findViewById(R.id.bt_questions_cancel);
-        // SWITCH_night_mode = findViewById(R.id.switch_night_mode);
+        SW_night_mode = findViewById(R.id.switch_night_mode);
+        SW_answer_question = findViewById(R.id.switch_answer_question);
         LL_player = findViewById(R.id.linearlayout_player);
         FL_settings = findViewById(R.id.framelayout_settings);
         FL_questions = findViewById(R.id.framelayout_questions);
@@ -100,24 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        SWITCH_night_mode.setOnSwitchListener(new NightModeButton.OnSwitchListener() {
-            @Override
-            public void onSwitchListener(boolean isNight) {
-                if(isNight){
-                    animateBackground(colorFrom,colorTo);
-                    animateStatusActionBar(getResources().getColor(R.color.colorPrimary),colorTo);
-                    Toast.makeText(getApplicationContext(),"Night Mode On",Toast.LENGTH_SHORT).show();
-                } else {
-                    animateBackground(colorTo,colorFrom);
-                    animateStatusActionBar(colorTo,getResources().getColor(R.color.colorPrimary));
-                    Toast.makeText(getApplicationContext(),"Night Mode Off",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-         */
-
         BT_add_player.setOnClickListener(v -> {
             BT_add_player.setVisibility(View.INVISIBLE);
             LL_player.setVisibility(View.VISIBLE);
@@ -146,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         BT_questions_apply.setOnClickListener(v -> {
-            Toast.makeText(this, ET_add_question.getText().toString(), Toast.LENGTH_SHORT).show();
-            listeQuestions.add(ET_add_question.getText().toString());
+            questionsList.add(new Question(ET_add_question.getText().toString(), convertSwitchValues(SW_answer_question)));
             Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             BT_add_player.setVisibility(View.VISIBLE);
             LL_player.setVisibility(View.GONE);
@@ -163,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
 
             // Permet d'appeller une activité
             Intent i = new Intent(getApplicationContext(), GameActivity.class);
-            i.putExtra("listQuestions", listeQuestions);
             i.putExtra("namePlayer1", namePlayer1);
             i.putExtra("namePlayer2", namePlayer2);
             i.putExtra("lengthQuestions", lengthQuestions);
+            i.putExtra("questionsList", questionsList);
             startActivity(i);
         });
     }
@@ -197,5 +183,13 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private int convertSwitchValues(SwitchMaterial SW_switch) {
+        if (SW_switch.isChecked()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

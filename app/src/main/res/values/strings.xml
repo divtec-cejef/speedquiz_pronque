@@ -16,4 +16,5 @@
     <string name="add_question">Add question</string>
     <string name="bt_settings_apply">Apply</string>
     <string name="bt_settings_cancel">Cancel</string>
+    <string name="answer_question">Question is true</string>
 </resources>

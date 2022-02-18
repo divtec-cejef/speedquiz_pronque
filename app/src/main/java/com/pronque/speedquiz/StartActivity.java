@@ -1,7 +1,6 @@
 package com.pronque.speedquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
@@ -26,7 +24,10 @@ import com.pronque.speedquiz.Models.Question;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Classe de l'activité de départ
+ */
+public class StartActivity extends AppCompatActivity {
     private Button BT_add_player;
     private Button BT_start_new_game;
     private Button BT_settings_apply;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_start);
         Toolbar main_toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(main_toolbar);
 
@@ -164,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -185,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Converti la valeur du switch des réponses en int
+     * @param SW_switch le switch
+     * @return la valeur en int
+     */
     private int convertSwitchValues(SwitchMaterial SW_switch) {
         if (SW_switch.isChecked()) {
             return 1;

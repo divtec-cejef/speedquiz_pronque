@@ -15,8 +15,10 @@ import com.pronque.speedquiz.Models.Question;
 import com.pronque.speedquiz.Controllers.QuestionManager;
 
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Classe de l'activité de jeu
+ */
 public class GameActivity extends AppCompatActivity {
     private TextView TV_name_player1;
     private TextView TV_name_player2;
@@ -93,7 +95,7 @@ public class GameActivity extends AppCompatActivity {
 
         BT_game_menu.setOnClickListener(v -> {
             // Permet d'appeller une activité
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), StartActivity.class);
             startActivity(i);
         });
 
@@ -111,6 +113,9 @@ public class GameActivity extends AppCompatActivity {
     }
      */
 
+    /**
+     * Si c'est la dernière question de la liste, stopper le jeu
+     */
     public void ifIsLastQuestion() {
         if (!questionManager.isLastQuestion(questionsList)) {
             TV_question_player1.setText(questionManager.getRandomQuestion(questionsList).getQuestion());

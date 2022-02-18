@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -133,7 +134,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
         BT_questions_apply.setOnClickListener(v -> {
-            questionsList.add(new Question(ET_add_question.getText().toString(), convertAnswerSwitchValues(SW_answer_question)));
+            // questionsList.add(new Question(ET_add_question.getText().toString(), Valeur switch);
             Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             BT_add_player.setVisibility(View.VISIBLE);
             LL_player.setVisibility(View.GONE);
@@ -182,19 +183,6 @@ public class StartActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    /**
-     * Converti la valeur du switch des réponses en int
-     * @param SW_switch le switch
-     * @return la valeur en int
-     */
-    private int convertAnswerSwitchValues(SwitchMaterial SW_switch) {
-        if (SW_switch.isChecked()) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     private long convertLengthQuestionsSliderValues(Slider slider) {

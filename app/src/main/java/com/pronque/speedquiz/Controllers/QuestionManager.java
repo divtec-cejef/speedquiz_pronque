@@ -9,41 +9,30 @@ import java.util.Random;
  * Classe qui représente un manager de question
  */
 public class QuestionManager {
-    private ArrayList<Question> questionsList;
+    private ArrayList<Question> questionsList = new ArrayList<>();
 
     /**
      * Construit un manager de question
-     * @param questionsList la liste de questions
      */
-    public QuestionManager(ArrayList<Question> questionsList) {
+    public QuestionManager() {
         initQuestionsList(questionsList);
     }
 
     /**
-     * Obtient la liste de questions
-     * @return la liste de questions
-     */
-    public ArrayList<Question> getQuestionsList() {
-        return questionsList;
-    }
-
-    /**
      * Obtient l'index de la question
-     * @param questionsList la liste de questions
      * @return l'index
      */
-    public int getQuestionIndex(ArrayList<Question> questionsList) {
+    public int getQuestionIndex() {
         Random random = new Random();
         return random.nextInt(questionsList.size());
     }
 
     /**
      * Obtient une question aléatoire
-     * @param questionsList la liste de questions
      * @return la question
      */
-    public Question getRandomQuestion(ArrayList<Question> questionsList) {
-        int randomIndex = getQuestionIndex(questionsList);
+    public Question getRandomQuestion() {
+        int randomIndex = getQuestionIndex();
         Question question = questionsList.get(randomIndex);
         questionsList.remove(randomIndex);
         return question;
@@ -51,10 +40,9 @@ public class QuestionManager {
 
     /**
      * Teste si c'est la dernière question de la liste
-     * @param questionsList la liste de questions
      * @return le résultat du test
      */
-    public boolean isLastQuestion(ArrayList<Question> questionsList) {
+    public boolean isLastQuestion() {
         return questionsList.isEmpty();
     }
 

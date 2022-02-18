@@ -8,16 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.pronque.speedquiz.Models.Question;
 import com.pronque.speedquiz.Controllers.QuestionManager;
+import com.pronque.speedquiz.Models.Question;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * Classe de l'activité de jeu
@@ -68,52 +66,57 @@ public class GameActivity extends AppCompatActivity {
         // Permet de récupérer les extras de l'intent
         Bundle extras = getIntent().getExtras();
 
-        // Récupère le nom des joueurs
+        // Récupère le nom des joueurs, la durée des questions et la liste des questions
         String namePlayer1 = extras.getString("namePlayer1");
         String namePlayer2 = extras.getString("namePlayer2");
         long lengthQuestions = extras.getLong("lengthQuestions");
         questionsList = (ArrayList<Question>) extras.get("questionsList");
 
+        long timerIterationStartMillis = 5000;
+
         // Défini le texte pour les TextViews
         TV_name_player1.setText(namePlayer1);
         TV_name_player2.setText(namePlayer2);
 
-        questionManager = new QuestionManager(questionsList);
-
-        Question questionPlayer1 = questionManager.getRandomQuestion(questionsList);
-        Question questionPlayer2 = questionManager.getRandomQuestion(questionsList);
+        questionManager = new QuestionManager();
 
         Handler handler = new Handler();
         questionRunnable = new Runnable() {
             @Override
             public void run() {
-                if (questionManager.isLastQuestion(questionsList)) {
+                if (questionManager.isLastQuestion()) {
                     CL_game.setVisibility(View.INVISIBLE);
                     FL_game_end.setVisibility(View.VISIBLE);
                     handler.removeCallbacks(this);
                     // DO_OTHER_EXIT_CODE
                 } else {
+                    Question questionPlayer1 = questionManager.getRandomQuestion();
+                    Question questionPlayer2 = questionManager.getRandomQuestion();
                     // DO_CODE_QUESTION_ITERATION
 
                     BT_player1.setOnClickListener(v -> {
                         BT_player2.setEnabled(false);
-                        Toast.makeText(GameActivity.this, "Appui bt player 1", Toast.LENGTH_SHORT).show();
-                        BT_player2.setEnabled(true);
+                        TV_score_player1.setText(scorePlayer(questionPlayer1));
                     });
 
                     BT_player2.setOnClickListener(v -> {
                         BT_player1.setEnabled(false);
-                        Toast.makeText(GameActivity.this, "Appui bt player 2", Toast.LENGTH_SHORT).show();
-                        BT_player1.setEnabled(true);
+                        TV_score_player2.setText(scorePlayer(questionPlayer2));
                     });
+                    BT_player1.setEnabled(true);
+                    BT_player2.setEnabled(true);
 
-                    TV_question_player1.setText(questionManager.getRandomQuestion(questionsList).getQuestion());
-                    TV_question_player2.setText(questionManager.getRandomQuestion(questionsList).getQuestion());
+                    TV_question_player1.setText(questionPlayer1.getQuestion());
+                    TV_question_player2.setText(questionPlayer2.getQuestion());
                     handler.postDelayed(this, lengthQuestions);
                 }
             }
         };
-        handler.postDelayed(questionRunnable,5000);
+        BT_player1.setEnabled(false);
+        BT_player2.setEnabled(false);
+        TV_question_player1.setText("Prêt ?");
+        TV_question_player2.setText("Prêt ?");
+        handler.postDelayed(questionRunnable, timerIterationStartMillis);
 
         BT_game_menu.setOnClickListener(v -> {
             // Permet d'appeller une activité
@@ -125,13 +128,11 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    public int scorePlayer(Question question) {
+    public String scorePlayer(Question question) {
         int scorePlayer = 0;
         if (question.getAnswer() == 1) {
             scorePlayer++;
         }
-        return scorePlayer;
+        return String.valueOf(scorePlayer);
     }
-     */
 }

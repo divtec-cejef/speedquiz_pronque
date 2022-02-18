@@ -7,7 +7,7 @@ public class Question {
     private String question;
     private int answer;
 
-    public Question() {};
+    public Question() {}
 
     /**
      * Construit une question

@@ -1,9 +1,5 @@
 package com.pronque.speedquiz;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +13,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -134,7 +133,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
         BT_questions_apply.setOnClickListener(v -> {
-            questionsList.add(new Question(ET_add_question.getText().toString(), convertSwitchValues(SW_answer_question)));
+            questionsList.add(new Question(ET_add_question.getText().toString(), convertAnswerSwitchValues(SW_answer_question)));
             Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             BT_add_player.setVisibility(View.VISIBLE);
             LL_player.setVisibility(View.GONE);
@@ -146,7 +145,7 @@ public class StartActivity extends AppCompatActivity {
             // Récupère le nom des joueurs
             String namePlayer1 = ET_name_player1.getText().toString();
             String namePlayer2 = ET_name_player2.getText().toString();
-            float lengthQuestions = SL_length_questions.getValue();
+            long lengthQuestions = convertLengthQuestionsSliderValues(SL_length_questions);
 
             // Permet d'appeller une activité
             Intent i = new Intent(getApplicationContext(), GameActivity.class);
@@ -190,11 +189,16 @@ public class StartActivity extends AppCompatActivity {
      * @param SW_switch le switch
      * @return la valeur en int
      */
-    private int convertSwitchValues(SwitchMaterial SW_switch) {
+    private int convertAnswerSwitchValues(SwitchMaterial SW_switch) {
         if (SW_switch.isChecked()) {
             return 1;
         } else {
             return 0;
         }
+    }
+
+    private long convertLengthQuestionsSliderValues(Slider slider) {
+        float sliderValue = slider.getValue();
+        return (long) (sliderValue * 1000);
     }
 }

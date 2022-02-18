@@ -1,7 +1,5 @@
 package com.pronque.speedquiz.Controllers;
 
-import android.content.Context;
-
 import com.pronque.speedquiz.Models.Question;
 
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ public class QuestionManager {
 
     /**
      * Construit un manager de question
-     * @param questionsList
+     * @param questionsList la liste de questions
      */
     public QuestionManager(ArrayList<Question> questionsList) {
         initQuestionsList(questionsList);

@@ -2,8 +2,6 @@ package com.pronque.speedquiz.Models;
 
 import android.database.Cursor;
 
-import java.util.Currency;
-
 /**
  * Classe qui représente une question
  */
@@ -11,23 +9,33 @@ public class Question {
     private String question;
     private int answer;
 
+    /*
     /**
      * Construit une question
+     *
      * @param question la question
-     * @param answer la réponse
+     * @param answer   la réponse
      */
+    /*
     public Question(String question, int answer) {
         this.question = question;
         this.answer = answer;
     }
+     */
 
+    /**
+     * Construit une question
+     *
+     * @param cursor tableau de la db
+     */
     public Question(Cursor cursor) {
-        question = cursor.getString(cursor.getColumnIndex("question"));
-        answer = cursor.getInt(cursor.getColumnIndex("reponse"));
+        question = cursor.getString(cursor.getColumnIndexOrThrow("question"));
+        answer = cursor.getInt(cursor.getColumnIndexOrThrow("reponse"));
     }
 
     /**
      * Obtient la question
+     *
      * @return la question
      */
     public String getQuestion() {
@@ -36,6 +44,7 @@ public class Question {
 
     /**
      * Obtient la réponse
+     *
      * @return la réponse
      */
     public int getAnswer() {

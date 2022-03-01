@@ -8,7 +8,6 @@ import com.pronque.speedquiz.Models.Question;
 import com.pronque.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Random;
 
 /**
@@ -26,6 +25,7 @@ public class QuestionManager {
 
     /**
      * Obtient l'index de la question
+     *
      * @return l'index
      */
     public int getQuestionIndex() {
@@ -35,6 +35,7 @@ public class QuestionManager {
 
     /**
      * Obtient une question aléatoire
+     *
      * @return la question
      */
     public Question getRandomQuestion() {
@@ -46,6 +47,7 @@ public class QuestionManager {
 
     /**
      * Teste si c'est la dernière question de la liste
+     *
      * @return le résultat du test
      */
     public boolean isLastQuestion() {
@@ -70,17 +72,18 @@ public class QuestionManager {
 
     /**
      * Charge une liste de question depuis la DB.
+     *
      * @param context Le contexte de l'application pour passer la query
-     * @return Une arraylist charger de Question
+     * @return Une arraylist chargée de questions
      */
-    private ArrayList<Question> initQuestionsList(Context context){
+    private ArrayList<Question> initQuestionsList(Context context) {
         ArrayList<Question> listQuestion = new ArrayList<>();
         SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(context);
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        Cursor cursor = db.query(true,"quiz",new String[]{"idQuiz","question","reponse"},null,null,null,null,"idquiz",null);
+        Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idquiz", null);
 
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             listQuestion.add(new Question(cursor));
         }
         cursor.close();

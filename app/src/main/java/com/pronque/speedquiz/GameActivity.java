@@ -112,8 +112,8 @@ public class GameActivity extends AppCompatActivity {
         };
         BT_player1.setEnabled(false);
         BT_player2.setEnabled(false);
-        TV_question_player1.setText("Prêt ?");
-        TV_question_player2.setText("Prêt ?");
+        TV_question_player1.setText(R.string.ready_before_questions);
+        TV_question_player2.setText(R.string.ready_before_questions);
         handler.postDelayed(questionRunnable, timerIterationStartMillis);
 
         BT_game_menu.setOnClickListener(v -> {
@@ -123,33 +123,55 @@ public class GameActivity extends AppCompatActivity {
         });
 
         BT_game_replay.setOnClickListener(v -> {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         });
     }
 
+    /**
+     * Incrémente le score du joueur
+     *
+     * @param question    la question
+     * @param scorePlayer le score du joueur
+     * @return la score du joueur
+     */
     public int scorePlayer(Question question, int scorePlayer) {
         if (question.getAnswer() == 1) {
-            scorePlayer++;
+            scorePlayer += 1;
         }
         return scorePlayer;
     }
 
+    /**
+     * Transforme le score du joueur int en string
+     *
+     * @param scorePlayer le score du joueur en int
+     * @return le score du joueur en int
+     */
     public String scorePlayerString(int scorePlayer) {
         return String.valueOf(scorePlayer);
     }
 
+    /**
+     * Détermine le résultat final
+     *
+     * @param scorePlayer1 le score du joueur 1
+     * @param scorePlayer2 le score du joueur 2
+     */
     private void finalResult(int scorePlayer1, int scorePlayer2) {
         BT_player1.setEnabled(false);
         BT_player2.setEnabled(false);
 
         if (scorePlayer1 > scorePlayer2) {
-            TV_question_player1.setText("Gagné");
-            TV_question_player2.setText("Perdu");
+            TV_question_player1.setText(R.string.game_win);
+            TV_question_player2.setText(R.string.game_lose);
         } else if (scorePlayer2 > scorePlayer1) {
-            TV_question_player1.setText("Perdu");
-            TV_question_player2.setText("Gagné");
+            TV_question_player1.setText(R.string.game_lose);
+            TV_question_player2.setText(R.string.game_win);
         } else {
-            TV_question_player1.setText("Égalité");
-            TV_question_player2.setText("Égalité");
+            TV_question_player1.setText(R.string.game_equality);
+            TV_question_player2.setText(R.string.game_equality);
         }
     }
 }

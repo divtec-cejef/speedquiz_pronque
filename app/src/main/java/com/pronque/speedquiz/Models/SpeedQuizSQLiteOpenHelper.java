@@ -4,18 +4,25 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Classe qui représente un SQLite Open Helper
+ */
 public class SpeedQuizSQLiteOpenHelper extends SQLiteOpenHelper {
 
     static String DB_NAME = "SpeedQuiz.db";
     static int DB_VERSION = 1;
 
+    /**
+     * Construit un SQLite Open Helper
+     *
+     * @param context le contexte de l'application
+     */
     public SpeedQuizSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         String sqlCreateDatabaseQuiz = "CREATE TABLE quiz(idQuiz INTEGER PRIMARY KEY, question TEXT, reponse INTEGER);";
         db.execSQL(sqlCreateDatabaseQuiz);
         db.execSQL("INSERT INTO quiz VALUES(1,\"Internet a été crée en 1969\",0)");

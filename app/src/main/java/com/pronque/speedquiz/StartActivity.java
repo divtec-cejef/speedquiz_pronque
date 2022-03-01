@@ -1,6 +1,8 @@
 package com.pronque.speedquiz;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.pronque.speedquiz.Models.Question;
+import com.pronque.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
 
 import java.util.ArrayList;
 
@@ -134,7 +137,22 @@ public class StartActivity extends AppCompatActivity {
         });
 
         BT_questions_apply.setOnClickListener(v -> {
-            // questionsList.add(new Question(ET_add_question.getText().toString(), Valeur switch);
+            Toast.makeText(this, "INSERT INTO quiz VALUES(6," + ET_add_question.getText().toString() + "," + convertAnswerQuestionSwitchValues() + ")", Toast.LENGTH_SHORT).show();
+            /*
+            SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(getApplicationContext());
+            SQLiteDatabase db = helper.getReadableDatabase();
+
+            db.execSQL("INSERT INTO quiz VALUES(6,\"" + ET_add_question.getText().toString() + "\", convertAnswerQuestionSwitchValues())");
+            Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idquiz", null);
+
+            while (cursor.moveToNext()) {
+                questionsList.add(new Question(cursor));
+            }
+
+            cursor.close();
+            db.close();
+             */
+
             Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             BT_add_player.setVisibility(View.VISIBLE);
             LL_player.setVisibility(View.GONE);
@@ -188,5 +206,15 @@ public class StartActivity extends AppCompatActivity {
     private long convertLengthQuestionsSliderValues(Slider slider) {
         float sliderValue = slider.getValue();
         return (long) (sliderValue * 1000);
+    }
+
+    public int convertAnswerQuestionSwitchValues() {
+        boolean switchValue = SW_answer_question.isChecked();
+
+        if (switchValue) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

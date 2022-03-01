@@ -17,4 +17,8 @@
     <string name="bt_settings_apply">Appliquer</string>
     <string name="bt_settings_cancel">Annuler</string>
     <string name="answer_question">Question est vraie</string>
+    <string name="ready_before_questions">Prêt ?</string>
+    <string name="game_win">Gagné</string>
+    <string name="game_equality">Egalité</string>
+    <string name="game_lose">Perdu</string>
 </resources>

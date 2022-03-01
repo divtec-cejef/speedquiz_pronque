@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
         TV_name_player1.setText(namePlayer1);
         TV_name_player2.setText(namePlayer2);
 
-        questionManager = new QuestionManager();
+        questionManager = new QuestionManager(getApplicationContext());
 
         Handler handler = new Handler();
         questionRunnable = new Runnable() {

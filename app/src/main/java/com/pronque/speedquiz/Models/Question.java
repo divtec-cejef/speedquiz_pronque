@@ -1,13 +1,15 @@
 package com.pronque.speedquiz.Models;
 
+import android.database.Cursor;
+
+import java.util.Currency;
+
 /**
  * Classe qui représente une question
  */
 public class Question {
     private String question;
     private int answer;
-
-    public Question() {}
 
     /**
      * Construit une question
@@ -17,6 +19,11 @@ public class Question {
     public Question(String question, int answer) {
         this.question = question;
         this.answer = answer;
+    }
+
+    public Question(Cursor cursor) {
+        question = cursor.getString(cursor.getColumnIndex("question"));
+        answer = cursor.getInt(cursor.getColumnIndex("reponse"));
     }
 
     /**

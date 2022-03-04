@@ -31,6 +31,10 @@ public class SpeedQuizSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO quiz VALUES(null,\"Le foot est le sport le plus regardé dans le monde\",1)");
         db.execSQL("INSERT INTO quiz VALUES(null,\"Cristiano Ronaldo a gagné 5 ballons d'Or\",1)");
         db.execSQL("INSERT INTO quiz VALUES(null,\"Lionel Messi est le meilleur joueur de l'Histoire\",1)");
+        db.execSQL("INSERT INTO quiz VALUES(null,\"Minecraft est le jeu le plus vendu au monde\",1)");
+        db.execSQL("INSERT INTO quiz VALUES(null,\"Neil Armstrong a posé le pied sur la Lune en 1969\",1)");
+        db.execSQL("INSERT INTO quiz VALUES(null,\"La 2ème guerre mondiale à durée de 1939 à 1944\",0)");
+        db.execSQL("INSERT INTO quiz VALUES(null,\"Le canton du Jura est entré dans la Confédération en 1978\",0)");
     }
 
     @Override

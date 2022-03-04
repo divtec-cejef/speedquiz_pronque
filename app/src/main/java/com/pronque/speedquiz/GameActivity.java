@@ -63,11 +63,10 @@ public class GameActivity extends AppCompatActivity {
         // Permet de récupérer les extras de l'intent
         Bundle extras = getIntent().getExtras();
 
-        // Récupère le nom des joueurs, la durée des questions et la liste des questions
+        // Récupère le nom des joueurs et la durée des questions
         String namePlayer1 = extras.getString("namePlayer1");
         String namePlayer2 = extras.getString("namePlayer2");
         long lengthQuestions = extras.getLong("lengthQuestions");
-        ArrayList<Question> questionsList = (ArrayList<Question>) extras.get("questionsList");
 
         long timerIterationStartMillis = 5000;
         AtomicInteger scorePlayer1 = new AtomicInteger();

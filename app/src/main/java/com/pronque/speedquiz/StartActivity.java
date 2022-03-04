@@ -1,5 +1,6 @@
 package com.pronque.speedquiz;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -137,23 +138,24 @@ public class StartActivity extends AppCompatActivity {
         });
 
         BT_questions_apply.setOnClickListener(v -> {
-            Toast.makeText(this, "INSERT INTO quiz VALUES(6," + ET_add_question.getText().toString() + "," + convertAnswerQuestionSwitchValues() + ")", Toast.LENGTH_SHORT).show();
-            /*
+            // Insertion d'une question dans la db
             SpeedQuizSQLiteOpenHelper helper = new SpeedQuizSQLiteOpenHelper(getApplicationContext());
-            SQLiteDatabase db = helper.getReadableDatabase();
+            SQLiteDatabase db = helper.getWritableDatabase();
 
-            db.execSQL("INSERT INTO quiz VALUES(6,\"" + ET_add_question.getText().toString() + "\", convertAnswerQuestionSwitchValues())");
-            Cursor cursor = db.query(true, "quiz", new String[]{"idQuiz", "question", "reponse"}, null, null, null, null, "idquiz", null);
+            ContentValues values = new ContentValues();
+            values.put("question", ET_add_question.getText().toString());
+            values.put("reponse", convertAnswerQuestionSwitchValues());
+            long rowId = db.insert("quiz", null, values);
 
-            while (cursor.moveToNext()) {
-                questionsList.add(new Question(cursor));
+            // Tester si l'insertion est ok
+            if (rowId == -1) {
+                Toast.makeText(this, "Erreur lors de l'ajout de la question", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             }
 
-            cursor.close();
             db.close();
-             */
 
-            Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
             BT_add_player.setVisibility(View.VISIBLE);
             LL_player.setVisibility(View.GONE);
             FL_settings.setVisibility(View.GONE);
@@ -227,7 +229,6 @@ public class StartActivity extends AppCompatActivity {
      */
     public int convertAnswerQuestionSwitchValues() {
         boolean switchValue = SW_answer_question.isChecked();
-
         if (switchValue) {
             return 1;
         } else {

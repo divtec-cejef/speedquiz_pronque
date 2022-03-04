@@ -9,20 +9,6 @@ public class Question {
     private String question;
     private int answer;
 
-    /*
-    /**
-     * Construit une question
-     *
-     * @param question la question
-     * @param answer   la réponse
-     */
-    /*
-    public Question(String question, int answer) {
-        this.question = question;
-        this.answer = answer;
-    }
-     */
-
     /**
      * Construit une question
      *

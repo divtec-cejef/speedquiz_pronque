@@ -164,7 +164,7 @@ public class StartActivity extends AppCompatActivity {
             // Récupère le nom des joueurs
             String namePlayer1 = ET_name_player1.getText().toString();
             String namePlayer2 = ET_name_player2.getText().toString();
-            long lengthQuestions = convertLengthQuestionsSliderValues(SL_length_questions);
+            long lengthQuestions = convertLengthQuestionsSliderValues();
 
             // Permet d'appeller une activité
             Intent i = new Intent(getApplicationContext(), GameActivity.class);
@@ -174,6 +174,14 @@ public class StartActivity extends AppCompatActivity {
             i.putExtra("questionsList", questionsList);
             startActivity(i);
         });
+
+        SW_night_mode.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (SW_night_mode.isChecked()) {
+                Toast.makeText(StartActivity.this, "Mode sombre activé", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(StartActivity.this, "Mode clair activé", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,7 +189,6 @@ public class StartActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -203,11 +210,21 @@ public class StartActivity extends AppCompatActivity {
         return true;
     }
 
-    private long convertLengthQuestionsSliderValues(Slider slider) {
-        float sliderValue = slider.getValue();
-        return (long) (sliderValue * 1000);
+    /**
+     * Converti les valeurs du slider des questions en millisecondes
+     *
+     * @return la valeur du slider en millisecondes
+     */
+    private long convertLengthQuestionsSliderValues() {
+        float sliderValue = SL_length_questions.getValue();
+        return (long) (sliderValue * 1000.0);
     }
 
+    /**
+     * Converti les valeurs du switch de la réponse à la question en int
+     *
+     * @return le réponse en int
+     */
     public int convertAnswerQuestionSwitchValues() {
         boolean switchValue = SW_answer_question.isChecked();
 

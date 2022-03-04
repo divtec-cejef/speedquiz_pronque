@@ -15,6 +15,7 @@ import com.pronque.speedquiz.Controllers.QuestionManager;
 import com.pronque.speedquiz.Models.Question;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Classe de l'activité de jeu
@@ -69,8 +70,8 @@ public class GameActivity extends AppCompatActivity {
         ArrayList<Question> questionsList = (ArrayList<Question>) extras.get("questionsList");
 
         long timerIterationStartMillis = 5000;
-        int scorePlayer1 = 0;
-        int scorePlayer2 = 0;
+        AtomicInteger scorePlayer1 = new AtomicInteger();
+        AtomicInteger scorePlayer2 = new AtomicInteger();
 
         // Défini le texte pour les TextViews
         TV_name_player1.setText(namePlayer1);
@@ -83,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (questionManager.isLastQuestion()) {
-                    finalResult(scorePlayer1, scorePlayer2);
+                    finalResult(scorePlayer1.get(), scorePlayer2.get());
                     handler.removeCallbacks(this);
                     // DO_OTHER_EXIT_CODE
                     FL_game_end.setVisibility(View.VISIBLE);
@@ -96,12 +97,16 @@ public class GameActivity extends AppCompatActivity {
 
                     BT_player1.setOnClickListener(v -> {
                         BT_player2.setEnabled(false);
-                        TV_score_player1.setText(scorePlayerString(scorePlayer(questionPlayer1, scorePlayer1)));
+                        BT_player1.setEnabled(false);
+                        scorePlayer1.set(scorePlayer(questionPlayer1, scorePlayer1.get()));
+                        TV_score_player1.setText(scorePlayerString(scorePlayer1.get()));
                     });
 
                     BT_player2.setOnClickListener(v -> {
                         BT_player1.setEnabled(false);
-                        TV_score_player2.setText(scorePlayerString(scorePlayer(questionPlayer2, scorePlayer2)));
+                        BT_player2.setEnabled(false);
+                        scorePlayer2.set(scorePlayer(questionPlayer2, scorePlayer2.get()));
+                        TV_score_player2.setText(scorePlayerString(scorePlayer2.get()));
                     });
 
                     BT_player1.setEnabled(true);
@@ -123,6 +128,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         BT_game_replay.setOnClickListener(v -> {
+            // Redémarre l'activité
             Intent intent = getIntent();
             finish();
             startActivity(intent);
@@ -130,7 +136,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
-     * Incrémente le score du joueur
+     * Gère le score du joueur
      *
      * @param question    la question
      * @param scorePlayer le score du joueur
@@ -139,7 +145,10 @@ public class GameActivity extends AppCompatActivity {
     public int scorePlayer(Question question, int scorePlayer) {
         if (question.getAnswer() == 1) {
             scorePlayer += 1;
+        } else if (question.getAnswer() == 0 && scorePlayer > 0) {
+            scorePlayer -= 1;
         }
+
         return scorePlayer;
     }
 

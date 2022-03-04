@@ -35,7 +35,7 @@ public class SpeedQuizSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + "SpeedQuiz.db");
+        db.execSQL("DROP TABLE IF EXISTS " + "quiz");
         onCreate(db);
     }
 }

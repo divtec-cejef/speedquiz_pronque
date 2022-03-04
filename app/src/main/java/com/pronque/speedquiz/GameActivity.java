@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pronque.speedquiz.Controllers.QuestionManager;
 import com.pronque.speedquiz.Models.Question;
 
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

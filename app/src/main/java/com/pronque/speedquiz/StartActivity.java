@@ -2,7 +2,6 @@ package com.pronque.speedquiz;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,20 +11,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.pronque.speedquiz.Models.Question;
 import com.pronque.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
-
 import java.util.ArrayList;
 
 /**
@@ -147,11 +142,19 @@ public class StartActivity extends AppCompatActivity {
             values.put("reponse", convertAnswerQuestionSwitchValues());
             long rowId = db.insert("quiz", null, values);
 
+            // Teste s'il y a un nombre impair de questions et si oui en ajoute une
+            // Pour éviter que l'app plante
+            if ((questionsList.size() - 1) % 2 != 0) {
+                values.put("question", "l'EMT est à Porrentruy");
+                values.put("reponse", 1);
+                db.insert("quiz", null, values);
+            }
+
             // Tester si l'insertion est ok
             if (rowId == -1) {
                 Toast.makeText(this, "Erreur lors de l'ajout de la question", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Votre question a bien été ajouté", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Votre question a bien été ajoutée", Toast.LENGTH_SHORT).show();
             }
 
             db.close();
@@ -173,7 +176,6 @@ public class StartActivity extends AppCompatActivity {
             i.putExtra("namePlayer1", namePlayer1);
             i.putExtra("namePlayer2", namePlayer2);
             i.putExtra("lengthQuestions", lengthQuestions);
-            i.putExtra("questionsList", questionsList);
             startActivity(i);
         });
 

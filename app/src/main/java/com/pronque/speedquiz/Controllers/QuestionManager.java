@@ -86,9 +86,9 @@ public class QuestionManager {
         while (cursor.moveToNext()) {
             listQuestion.add(new Question(cursor));
         }
+
         cursor.close();
         db.close();
-
         return listQuestion;
     }
 }

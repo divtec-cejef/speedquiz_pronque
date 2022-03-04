@@ -15,12 +15,15 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.slider.Slider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.pronque.speedquiz.Models.Question;
 import com.pronque.speedquiz.Models.SpeedQuizSQLiteOpenHelper;
+
 import java.util.ArrayList;
 
 /**

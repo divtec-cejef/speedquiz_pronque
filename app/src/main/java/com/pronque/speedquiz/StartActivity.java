@@ -145,7 +145,7 @@ public class StartActivity extends AppCompatActivity {
             // Teste s'il y a un nombre impair de questions et si oui en ajoute une
             // Pour éviter que l'app plante
             if ((questionsList.size() - 1) % 2 != 0) {
-                values.put("question", "l'EMT est à Porrentruy");
+                values.put("question", "L'EMT est à Porrentruy");
                 values.put("reponse", 1);
                 db.insert("quiz", null, values);
             }

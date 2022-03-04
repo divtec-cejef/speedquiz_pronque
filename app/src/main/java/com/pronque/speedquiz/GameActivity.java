@@ -1,5 +1,6 @@
 package com.pronque.speedquiz;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,9 @@ public class GameActivity extends AppCompatActivity {
     private Button BT_game_menu;
     private Button BT_game_replay;
     private FrameLayout FL_game_end;
+
+    private int scorePlayer1;
+    private int scorePlayer2;
 
     private QuestionManager questionManager;
 
@@ -68,8 +73,6 @@ public class GameActivity extends AppCompatActivity {
         long lengthQuestions = extras.getLong("lengthQuestions");
 
         long timerIterationStartMillis = 5000;
-        AtomicInteger scorePlayer1 = new AtomicInteger();
-        AtomicInteger scorePlayer2 = new AtomicInteger();
 
         // Défini le texte pour les TextViews
         TV_name_player1.setText(namePlayer1);
@@ -79,10 +82,11 @@ public class GameActivity extends AppCompatActivity {
 
         Handler handler = new Handler();
         questionRunnable = new Runnable() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void run() {
                 if (questionManager.isLastQuestion()) {
-                    finalResult(scorePlayer1.get(), scorePlayer2.get());
+                    finalResult(scorePlayer1, scorePlayer2);
                     handler.removeCallbacks(this);
                     // DO_OTHER_EXIT_CODE
                     FL_game_end.setVisibility(View.VISIBLE);
@@ -94,17 +98,17 @@ public class GameActivity extends AppCompatActivity {
                     TV_question_player2.setText(questionPlayer2.getQuestion());
 
                     BT_player1.setOnClickListener(v -> {
-                        BT_player2.setEnabled(false);
                         BT_player1.setEnabled(false);
-                        scorePlayer1.set(scorePlayer(questionPlayer1, scorePlayer1.get()));
-                        TV_score_player1.setText(scorePlayerString(scorePlayer1.get()));
+                        BT_player2.setEnabled(false);
+                        scorePlayer1 = (scorePlayer(questionPlayer1, scorePlayer1));
+                        TV_score_player1.setText(scorePlayerString(scorePlayer1));
                     });
 
                     BT_player2.setOnClickListener(v -> {
                         BT_player1.setEnabled(false);
                         BT_player2.setEnabled(false);
-                        scorePlayer2.set(scorePlayer(questionPlayer2, scorePlayer2.get()));
-                        TV_score_player2.setText(scorePlayerString(scorePlayer2.get()));
+                        scorePlayer2 = (scorePlayer(questionPlayer2, scorePlayer2));
+                        TV_score_player2.setText(scorePlayerString(scorePlayer2));
                     });
 
                     BT_player1.setEnabled(true);

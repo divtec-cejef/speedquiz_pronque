@@ -9,14 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pronque.speedquiz.Controllers.QuestionManager;
 import com.pronque.speedquiz.Models.Question;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Classe de l'activité de jeu
